@@ -24,11 +24,7 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.store'
-
-interface LoginData {
-  email: string
-  password: string
-}
+import type { LoginData } from '@/type/types'
 
 export default {
   setup() {
@@ -64,7 +60,7 @@ export default {
         return console.error(error)
       }
 
-      // router.push({ name: 'products' })
+      // router.push({ name: 'dashboard' })
     }
 
     return {

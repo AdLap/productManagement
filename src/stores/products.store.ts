@@ -5,7 +5,8 @@ const baseUrl = `${import.meta.env.VITE_API_URL}/products`
 
 export const useProductsStore = defineStore('products', {
   state: () => ({
-    products: {}
+    products: {},
+    displayGrid: true
   }),
   actions: {
     async getAll() {
@@ -14,6 +15,9 @@ export const useProductsStore = defineStore('products', {
         .get(baseUrl)
         .then((products) => (this.products = products))
         .catch((error) => (this.products = { error }))
+    },
+    changeListGrid() {
+      this.displayGrid = !this.displayGrid
     }
   }
 })
