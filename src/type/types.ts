@@ -4,21 +4,22 @@ export interface LoginData {
 }
 
 export interface Category {
-  id: number
+  readonly id: number
   name: string
   image: string
-  creation: string
+  readonly creation: string
   updatedAt: string
 }
 
 export interface Product {
-  id: number
+  readonly id: number
   title: string
   price: number
   description: string
-  images: string[]
-  creationAt: string
-  updatedAt: string
+  images: string[] | string
+  readonly creationAt: string
+  readonly updatedAt: string
+  categoryId: number
   category: Category
 }
 
@@ -26,8 +27,15 @@ export interface Products {
   [index: number]: Product
 }
 
+export interface ProductInForm {
+  title: string
+  price: number
+  description: string
+  images: string
+  categoryId: number
+}
+
 export interface CardActions {
   name: string
   icon: string
-  action: () => void
 }
