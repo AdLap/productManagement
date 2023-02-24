@@ -1,29 +1,17 @@
-<template><!-- <nav> -->
+<template>
   <VToolbar>
-    <VBtn @click="goBack" prepend-icon="left-arrow">Wstecz</VBtn>
+    <VBtn @click="goBack" prepend-icon="mdi-arrow-u-left-top-bold" sticky>Back</VBtn>
     <VToolbarTitle class="text-uppercase grey--text">
       <VBtn @click="goHome">
-        <span class="font-weight-light">products</span>
+        <span class="font-weight-light">Products</span>
         <span>Manager</span>
       </VBtn>
     </VToolbarTitle>
     <VBtn @click="logOut" flat color="grey">
-      <span>Sign Out</span>
-      <VIcon size="large" color="green-darken-2">mdi-domain</VIcon>
+      <span>Logout</span>
+      <VIcon size="large">mdi-logout</VIcon>
     </VBtn>
-    <!-- <VList>
-        <VListItem>
-          <RouterLink to="/">Home</RouterLink>
-        </VListItem>
-        <VListItem>
-          <RouterLink to="/login">Zaloguj</RouterLink>
-        </VListItem>
-        <VListItem>
-          <RouterLink to="/products">Product List</RouterLink>
-        </VListItem>
-      </VList> -->
   </VToolbar>
-<!-- </nav> -->
 </template>
 
 <script setup lang="ts">

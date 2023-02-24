@@ -15,7 +15,8 @@ export const useProductsStore = defineStore('products', {
   }),
   getters: {
     getToEdit(state) {
-      return (productId: number) => state.products.filter((product) => product.id === productId)
+      return (productId: number) =>
+        state.products.filter((product) => product.id === productId)
     }
   },
   actions: {

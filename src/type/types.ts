@@ -35,7 +35,8 @@ export interface ProductInForm {
   categoryId: number
 }
 
-export interface CardActions {
-  name: string
-  icon: string
+export interface ConfirmOptions {
+  color: string
+  width: number
+  zIndex: number
 }
