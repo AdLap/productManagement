@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/auth.store'
+import type { Product } from '@/type/types'
 const baseUrl = `${import.meta.env.VITE_API_URL}`
 
 export const fetching = {
@@ -25,16 +26,16 @@ function request(method: string) {
 
 function authHeader(url: string): string | {} {
   const { user } = useAuthStore()
-  const isLoggedIn = !!user?.token
+  const isLoggedIn = !!user?.access_token
   const isApiUrl = url.startsWith(baseUrl)
   if (isLoggedIn && isApiUrl) {
-    return { Authorization: `Bearer ${user.token}` }
+    return { Authorization: `Bearer ${user.access_token}` }
   } else {
     return {}
   }
 }
 
-function handleResponse(response: any): {} | Error {
+function handleResponse(response: any): [] | Promise<Error> {
   return response.text().then((text: any) => {
     const data = text && JSON.parse(text)
 
