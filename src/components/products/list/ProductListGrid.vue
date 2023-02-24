@@ -7,7 +7,7 @@
       lg="3"
       v-for="product in products"
       :key="product.id"
-      @click="goToCard"
+      @click="goToCard(product.id)"
     >
       <VCard class="product-card-grid text-sx-center ma-3">
         <VImg :src="product.images[0]" cover class="mx-auto" max-width="200">
@@ -23,33 +23,24 @@
         <VCardText>
           {{ product.description }}
         </VCardText>
-        <VCardActions class="justify-end">
-          <VBtn>
-            <VIcon icon="mdi-menu" />
-            <VMenu activator="parent">
-              <VList>
-                <VListItem
-                  v-for="(item, index) in cardActions"
-                  :key="index"
-                  :value="index"
-                  :prepend-icon="item.icon"
-                >
-                  <VBtn @click="item.action">{{ item.name }}</VBtn>
-                </VListItem>
-              </VList>
-            </VMenu>
-          </VBtn>
-        </VCardActions>
+        <ProductActions :product-id="product.id" />
       </VCard>
     </VCol>
   </VRow>
 </template>
 
 <script setup lang="ts">
-import type { Products, CardActions } from '@/type/types'
+import router from '@/router'
+import type { Product } from '@/type/types'
+import ProductActions from '@/components/products/ProductActions.vue'
+
 defineProps<{
-  products: Products
-  cardActions: CardActions[]
-  goToCard: () => void
+  products: Product[]
 }>()
+
+defineEmits(['product'])
+
+const goToCard = (id: number): void => {
+  router.push({ name: 'product', params: { id } })
+}
 </script>
