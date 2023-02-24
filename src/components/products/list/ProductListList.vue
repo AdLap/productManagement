@@ -8,13 +8,13 @@
     >
       <VRow class="pa-5 align-center">
         <VCol cols="2" class="d-none d-sm-flex">
-          <!-- <VImg max-width="200" :src="product.images[0]" cover>
+          <VImg max-width="200" :src="product.images[0]" cover>
             <template v-slot:placeholder>
               <VRow class="fill-height ma-0" align="center" justify="center">
                 <VProgressCircular indeterminate color="grey-lighten-5" />
               </VRow>
             </template>
-          </VImg> -->
+          </VImg>
         </VCol>
         <VCol cols="11" sm="8">
           <VCardText>

@@ -6,11 +6,13 @@
         <VList>
           <VListItem>
             <EditProductForm :product-id="productId" />
-            <VBtn
-              @click="productStore.deleteProduct(productId)"
+            <!-- <VBtn @click="openConfirm" prepend-icon="mdi-delete">delete</VBtn> -->
+            <ConfirmPopup
+              title="Delete"
+              message="Are you sure to remove?"
               prepend-icon="mdi-delete"
-              >delete</VBtn
-            >
+              @agree="productStore.deleteProduct(productId)"
+            />
           </VListItem>
         </VList>
       </VMenu>
@@ -21,6 +23,7 @@
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
 import EditProductForm from '@/components/products/EditProductForm.vue'
+import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 
 defineProps<{
   productId: number

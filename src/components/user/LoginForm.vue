@@ -5,9 +5,19 @@
     </template>
     <VSheet width="300" class="mx-auto">
       <VForm fast-fail ref="form">
-        <VTextField v-model="loginData.email" label="Login" :rules="formRules.email" />
-        <VTextField v-model="loginData.password" label="Password" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show = !show" :rules="formRules.password" />
+        <VTextField
+          v-model="loginData.email"
+          label="Login"
+          :rules="formRules.email"
+        />
+        <VTextField
+          v-model="loginData.password"
+          label="Password"
+          :type="show ? 'password' : 'text'"
+          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show = !show"
+          :rules="formRules.password"
+        />
         <VBtn @click="loginUser" block class="mt-2">Zaloguj</VBtn>
       </VForm>
     </VSheet>
