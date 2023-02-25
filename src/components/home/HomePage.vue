@@ -1,8 +1,8 @@
 <template>
-  <VContainer class="h-100 d-flex flex-column" fluid>
-    <VRow>
+  <VContainer class="h-screen d-flex flex-column justify-evenly" fluid>
+    <VRow align="center">
       <VCol cols="12">
-        <VCard class="text-center mx-auto pa-5 w-100" max-width="600">
+        <VCard class="text-center mx-auto pa-5 w-100"  max-width="600">
           <h1>{{ title }}</h1>
           <p>{{ description }}</p>
         </VCard>
@@ -11,16 +11,28 @@
     <VRow>
       <VCol cols="12" sm="6">
         <VCard>
-          <VImg :src="`https://picsum.photos/500/300?image=1`" :lazy-src="`https://picsum.photos/10/6?image=1`" cover>
+          <VImg
+            :src="`https://picsum.photos/500/300?image=1`"
+            :lazy-src="`https://picsum.photos/10/6?image=1`"
+            cover
+          >
             <template v-slot:placeholder>
               <VRow class="fill-height ma-0" align="center" justify="center">
-                <VProgressCircular indeterminate color="grey-lighten-5"></VProgressCircular>
+                <VProgressCircular
+                  indeterminate
+                  color="grey-lighten-5"
+                ></VProgressCircular>
               </VRow>
             </template>
           </VImg>
         </VCard>
       </VCol>
-      <VCol v-if="!user" class="align-self-sm-center order-sm-first" cols="12" sm="6">
+      <VCol
+        v-if="!user"
+        class="align-self-sm-center order-sm-first"
+        cols="12"
+        sm="6"
+      >
         <VRow class="mt-5 justify-center" no-gutters>
           <Login />
           <VBtn variant="plain">Załóż konto</VBtn>
@@ -28,20 +40,11 @@
       </VCol>
     </VRow>
   </VContainer>
-  <!-- <VContainer>
-    <h1>Hi {{ authUser?.name }}</h1>
-    <ul v-if="users.length">
-      <li v-for="user in users" :key="user.id">{{ user.name }} {{ user.email }}</li>
-    </ul>
-    <div v-if="users.loading" class="spinner-border spinner-border-sm"></div>
-    <div v-if="users.error" class="text-danger">Error:: {{ users.error }}</div>
-  </VContainer> -->
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth.store'
-// import { useUsersStore } from '@/stores/users.store'
 import Login from '@/components/user/LoginForm.vue'
 
 defineProps<{
@@ -51,10 +54,6 @@ defineProps<{
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
-// const userStore = useUsersStore()
-// const { users } = storeToRefs(userStore)
-
-// userStore.getAll()
 </script>
 
 <style scoped lang="scss">

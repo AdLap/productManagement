@@ -20,6 +20,18 @@ const router = createRouter({
       path: '/products',
       name: 'products',
       component: () => import('@/views/products/ProductListView.vue')
+      // children: [
+      //   {
+      //     path: 'product/:id',
+      //     component: () => import('@/components/products/card/ProductCard.vue')
+      //   }
+      // ]
+    },
+    {
+      path: '/product/:id',
+      name: 'product',
+      // component: ProductCard
+      component: () => import('@/views/products/ProductCardView.vue')
     }
   ]
 })
@@ -30,7 +42,7 @@ router.beforeEach(async (to) => {
   const auth = useAuthStore()
 
   if (authRequired && !auth.user) {
-    auth.returnUrl = to.fullPath
+    // auth.returnUrl = to.fullPath
     return '/'
   }
 })

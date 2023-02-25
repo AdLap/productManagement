@@ -1,0 +1,33 @@
+<template>
+  <VCardActions class="justify-end">
+    <VBtn>
+      <VIcon icon="mdi-menu" />
+      <VMenu activator="parent">
+        <VList>
+          <VListItem>
+            <EditProductForm :product-id="productId" />
+            <!-- <VBtn @click="openConfirm" prepend-icon="mdi-delete">delete</VBtn> -->
+            <ConfirmPopup
+              title="Delete"
+              message="Are you sure to remove?"
+              prepend-icon="mdi-delete"
+              @agree="productStore.deleteProduct(productId)"
+            />
+          </VListItem>
+        </VList>
+      </VMenu>
+    </VBtn>
+  </VCardActions>
+</template>
+
+<script setup lang="ts">
+import { useProductsStore } from '@/stores/products.store'
+import EditProductForm from '@/components/products/EditProductForm.vue'
+import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
+
+defineProps<{
+  productId: number
+}>()
+
+const productStore = useProductsStore()
+</script>

@@ -25,8 +25,8 @@ $color-6: #ffc700;
 $color-7: #34dca2;
 $color-8: #00ada9;
 
-// breakpoints
-$xs: 599px;
+// breakpoints - all for min-width
+$xs: 599px; // exception - only for max-width
 $sm: 600px;
 $md: 960px;
 $lg: 1264px;

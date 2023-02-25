@@ -1,7 +1,3 @@
-.v-container {
-  max-width: 1000px;
-
-  @include media-up($lg) {
-    max-width: 1200px;
-  }
+.product-card-grid {
+  cursor: pointer;
 }

@@ -10,7 +10,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
 import '@/style/main.scss'
 
@@ -27,7 +27,6 @@ const vuetify = createVuetify({
 })
 
 const i18n = createI18n({})
-
 const app = createApp(App)
 
 app.use(createPinia())

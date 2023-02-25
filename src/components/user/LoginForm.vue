@@ -4,18 +4,21 @@
       <VBtn v-bind="props">Zaloguj się</VBtn>
     </template>
     <VSheet width="300" class="mx-auto">
-      <VForm fast-fail @submit.prevent="loginUser">
+      <VForm fast-fail ref="form" class="pa-4">
         <VTextField
           v-model="loginData.email"
           label="Login"
-          :rules="loginRules.emailRules"
+          :rules="formRules.email"
         />
         <VTextField
           v-model="loginData.password"
           label="Password"
-          :rules="loginRules.passwordRules"
+          :type="show ? 'password' : 'text'"
+          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show = !show"
+          :rules="formRules.password"
         />
-        <VBtn @click="loginUser" type="submit" block class="mt-2">Zaloguj</VBtn>
+        <VBtn @click="loginUser" block class="mt-2">Zaloguj</VBtn>
       </VForm>
     </VSheet>
   </VDialog>
@@ -24,53 +27,62 @@
 <script lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.store'
-
-interface LoginData {
-  email: string
-  password: string
-}
+import type { LoginData } from '@/type/types'
 
 export default {
   setup() {
+    const authStore = useAuthStore()
+
     const loginData = ref<LoginData>({
       email: '',
       password: ''
     })
 
-    const loginRules = ref({
-      emailRules: [
+    const formRules = ref({
+      email: [
         (value: string): boolean | string => {
           if (value.length > 3) return true
           return 'Login za krótki'
         }
       ],
-      passwordRules: [
+      password: [
         (value: string): boolean | string =>
           value.length > 3 || 'Więcej niż 3 znaki'
       ]
     })
+
+    const form = ref(null)
+    const show = ref(false)
+
+    const valid = async () => {
+      // @ts-ignore
+      return await form.value.validate()
+    }
 
     const loginUser = async () => {
       console.log(
         `Login: ${loginData.value.email}, Password: ${loginData.value.password}`
       )
 
-      const authStore = useAuthStore()
+      // valid().then(response => {
+      //   if (!response.valid) {
+      //     return
+      //   }
       const { email, password } = loginData.value
-
       try {
         return await authStore.login(email, password)
       } catch (error) {
         return console.error(error)
       }
-
-      // router.push({ name: 'products' })
+      // router.push({ name: 'dashboard' })
+      // })
     }
 
     return {
       loginData,
-      loginRules,
-      loginUser
+      formRules,
+      loginUser,
+      show
     }
   }
 }
