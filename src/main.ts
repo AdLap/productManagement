@@ -27,7 +27,6 @@ const vuetify = createVuetify({
 })
 
 const i18n = createI18n({})
-
 const app = createApp(App)
 
 app.use(createPinia())

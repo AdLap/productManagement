@@ -1,6 +1,6 @@
 <template>
   <VToolbar>
-    <VBtn @click="goBack" prepend-icon="mdi-arrow-u-left-top-bold" sticky>Back</VBtn>
+    <VBtn @click="goBack" icon="mdi-arrow-u-left-top" fab sticky top left />
     <VToolbarTitle class="text-uppercase grey--text">
       <VBtn @click="goHome">
         <span class="font-weight-light">Products</span>

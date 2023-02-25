@@ -1,5 +1,11 @@
 <template>
-  <VNavigationDrawer expand-on-hover rail>
+  <VNavigationDrawer
+    expand-on-hover
+    rail
+    app
+    :permanent="smAndUp"
+    class="w-xs-100"
+  >
     <VList>
       <VListItem
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
@@ -25,6 +31,10 @@
 </template>
 
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
+
+const { smAndUp } = useDisplay()
+
 const sideBarItems = [
   { icon: 'mdi-account', title: 'Account', value: 'account', link: '/' },
   {
@@ -33,6 +43,5 @@ const sideBarItems = [
     value: 'products',
     link: '/products'
   }
-  // { icon: 'mdi-folder', title: 'Logout', value: 'logout', link: '/' }
 ]
 </script>

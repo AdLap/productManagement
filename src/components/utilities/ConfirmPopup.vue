@@ -1,5 +1,5 @@
 <template>
-  <Vrow justify="center">
+  <VCardActions>
     <VDialog v-model="dialog" persistent width="600">
       <template v-slot:activator="{ props }">
         <VBtn v-bind="props" prepend-icon="mdi-delete">{{ title }}</VBtn>
@@ -18,7 +18,7 @@
         </VCardActions>
       </VCard>
     </VDialog>
-  </Vrow>
+  </VCardActions>
 </template>
 
 <script setup lang="ts">

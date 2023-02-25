@@ -4,7 +4,7 @@
       <VBtn v-bind="props">Zaloguj się</VBtn>
     </template>
     <VSheet width="300" class="mx-auto">
-      <VForm fast-fail ref="form">
+      <VForm fast-fail ref="form" class="pa-4">
         <VTextField
           v-model="loginData.email"
           label="Login"
