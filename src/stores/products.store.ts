@@ -11,14 +11,7 @@ export const useProductsStore = defineStore('products', {
     displayGrid: true,
     loading: false,
     error: null
-    // editedProduct: {} as () => Product
   }),
-  getters: {
-    getToEdit(state) {
-      return (productId: number) =>
-        state.products.filter((product) => product.id === productId)
-    }
-  },
   actions: {
     getAll(): void {
       this.loading = true
@@ -51,7 +44,6 @@ export const useProductsStore = defineStore('products', {
       return product ?? null
     },
     addProduct(product: Product): void {
-      console.log('add', product)
       this.loading = true
       fetching
         .post(baseUrl, product)
@@ -60,8 +52,6 @@ export const useProductsStore = defineStore('products', {
         .finally(() => (this.loading = false))
     },
     updateProduct(id: number, product: Product) {
-      // this.editProduct = this.findProduct(id)
-      console.log('update::', id, product)
       this.loading = true
       fetching
         .put(`${baseUrl}/${id}`, product)
@@ -70,7 +60,6 @@ export const useProductsStore = defineStore('products', {
         .finally(() => (this.loading = false))
     },
     deleteProduct(id: number) {
-      console.log('del::', id)
       fetching
         .delete(`${baseUrl}/${id}`)
         .then((resp) => {
