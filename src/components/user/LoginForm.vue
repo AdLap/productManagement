@@ -1,7 +1,7 @@
 <template>
   <VDialog max-width="600">
     <template v-slot:activator="{ props }">
-      <VBtn v-bind="props">Zaloguj się</VBtn>
+      <VBtn v-bind="props">Sign in</VBtn>
     </template>
     <VSheet width="300" class="mx-auto">
       <VForm fast-fail ref="form" class="pa-4">
@@ -18,7 +18,7 @@
           @click:append="show = !show"
           :rules="formRules.password"
         />
-        <VBtn @click="loginUser" block class="mt-2">Zaloguj</VBtn>
+        <VBtn @click="loginUser" block class="mt-2">Log in</VBtn>
       </VForm>
     </VSheet>
   </VDialog>
