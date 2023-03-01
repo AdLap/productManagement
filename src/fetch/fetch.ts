@@ -1,5 +1,4 @@
 import { useAuthStore } from '@/stores/auth.store'
-import type { Product } from '@/type/types'
 const baseUrl = `${import.meta.env.VITE_API_URL}`
 
 export const fetching = {

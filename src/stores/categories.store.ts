@@ -21,6 +21,7 @@ export const useCategoriesStore = defineStore('categories', {
             throw new Error('Wrong data')
           }
           this.categories = [...categories]
+          console.log('cate::', categories)
         })
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))

@@ -7,7 +7,7 @@ const baseUrl = `${import.meta.env.VITE_API_URL}/products`
 export const useProductsStore = defineStore('products', {
   state: () => ({
     products: [] as Product[],
-    currentProduct: ({} as Product) ?? null,
+    currentProduct: {} as Product,
     displayGrid: true,
     loading: false,
     error: null
@@ -34,14 +34,14 @@ export const useProductsStore = defineStore('products', {
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))
     },
-    findProduct(id: number): Product | null {
+    findProduct(id: number): Product {
       if (!this.products.length) {
         this.getProduct(id)
         return this.currentProduct
       }
-      const product = this.products.find((p: Product) => p.id === id)
-
-      return product ?? null
+      const pr = this.products.filter((p: Product) => p.id === id)
+      const product = Object.assign(this.currentProduct, pr)
+      return product
     },
     addProduct(product: Product): void {
       this.loading = true
