@@ -51,7 +51,7 @@ export const useProductsStore = defineStore('products', {
         .catch((error) => console.error(error))
         .finally(() => (this.loading = false))
     },
-    updateProduct(id: number, product: Product) {
+    updateProduct(id: number, product: Product): void {
       this.loading = true
       fetching
         .put(`${baseUrl}/${id}`, product)
@@ -59,12 +59,11 @@ export const useProductsStore = defineStore('products', {
         .catch((error) => console.error(error))
         .finally(() => (this.loading = false))
     },
-    deleteProduct(id: number) {
+    deleteProduct(id: number): void {
       fetching
         .delete(`${baseUrl}/${id}`)
         .then((resp) => {
           if (!resp) {
-            console.error('błąd')
             throw new Error('Something went wrong')
           }
           this.getAll()
@@ -72,7 +71,7 @@ export const useProductsStore = defineStore('products', {
         .catch((error) => console.error(error))
         .finally(() => (this.loading = false))
     },
-    changeListGrid() {
+    changeListGrid(): void {
       this.displayGrid = !this.displayGrid
     }
   }

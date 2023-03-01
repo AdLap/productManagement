@@ -5,15 +5,15 @@
         <VBtn v-bind="props" prepend-icon="mdi-delete">{{ title }}</VBtn>
       </template>
       <VCard>
-        <VCardTitle class="text-h5">Potwierdzenie</VCardTitle>
+        <VCardTitle class="text-h5">Confirm</VCardTitle>
         <VCardText>{{ message }}</VCardText>
         <VCardActions>
           <VSpacer></VSpacer>
           <VBtn color="green-darken-1" variant="text" @click="cancel">
-            Anuluj
+            Cancel
           </VBtn>
           <VBtn color="green-darken-1" variant="text" @click="agree">
-            Potwiedź
+            Confirm
           </VBtn>
         </VCardActions>
       </VCard>

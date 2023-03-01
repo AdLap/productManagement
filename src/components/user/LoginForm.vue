@@ -18,7 +18,7 @@
           @click:append="show = !show"
           :rules="formRules.password"
         />
-        <VBtn @click="loginUser" block class="mt-2">Log in</VBtn>
+        <VBtn @click="loginUser" block class="mt-2">Sign in</VBtn>
       </VForm>
     </VSheet>
   </VDialog>
@@ -42,12 +42,12 @@ export default {
       email: [
         (value: string): boolean | string => {
           if (value.length > 3) return true
-          return 'Login za krótki'
+          return 'Enter more than 3 characters'
         }
       ],
       password: [
         (value: string): boolean | string =>
-          value.length > 3 || 'Więcej niż 3 znaki'
+          value.length > 3 || 'Enter more than 3 characters'
       ]
     })
 
@@ -64,6 +64,7 @@ export default {
         `Login: ${loginData.value.email}, Password: ${loginData.value.password}`
       )
 
+      // TODO validation on submit
       // valid().then(response => {
       //   if (!response.valid) {
       //     return
@@ -74,8 +75,6 @@ export default {
       } catch (error) {
         return console.error(error)
       }
-      // router.push({ name: 'dashboard' })
-      // })
     }
 
     return {

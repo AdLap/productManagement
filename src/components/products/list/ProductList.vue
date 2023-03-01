@@ -1,10 +1,13 @@
 <template>
-  <VSheet elevation="4" max-max-width="600" class="d-flex justify-space-between pa-3">
+  <VSheet
+    elevation="4"
+    max-max-width="600"
+    class="d-flex justify-space-between pa-3"
+  >
     <h2>Product List</h2>
     <AddProductForm />
     <VBtn @click="productStore.changeListGrid">
-      <VIcon v-if="displayGrid" icon="mdi-view-list" />
-      <VIcon v-else icon="mdi-view-grid" />
+      <VIcon :icon="displayGrid ? 'mdi-view-list' : 'mdi-view-grid'" />
     </VBtn>
   </VSheet>
 
@@ -14,7 +17,12 @@
     <VRow justify="center">
       <VCol cols="6">
         <VContainer class="max-width">
-          <VPagination v-model="page.currPage" :length="paginationLength" rounded="0" class="my-4"></VPagination>
+          <VPagination
+            v-model="page.currPage"
+            :length="paginationLength"
+            rounded="0"
+            class="my-4"
+          ></VPagination>
         </VContainer>
       </VCol>
     </VRow>
@@ -27,14 +35,17 @@ import { useProductsStore } from '@/stores/products.store'
 import ProductListGrid from '@/components/products/list/ProductListGrid.vue'
 import ProductListList from '@/components/products/list/ProductListList.vue'
 import AddProductForm from '@/components/products/AddProductForm.vue'
-import { computed, ref } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
+import type { Product } from '@/type/types'
 
 const productStore = useProductsStore()
 const { products, displayGrid } = storeToRefs(productStore)
 
-if (!products.value.length) {
-  productStore.getAll()
-}
+onBeforeMount(() => {
+  if (!products.value.length) {
+    productStore.getAll()
+  }
+})
 
 const page = ref({
   currPage: 1,
@@ -42,9 +53,9 @@ const page = ref({
   perPage: 25
 })
 
-const paginationLength = computed(() => page.value.length / page.value.perPage)
+const paginationLength = computed<number>(() => page.value.length / page.value.perPage)
 
-const paginatedProducts = computed(() => {
+const paginatedProducts = computed<Product[]>(() => {
   const lastProduct = page.value.perPage * page.value.currPage
   return products.value.slice(lastProduct - page.value.perPage, lastProduct)
 })

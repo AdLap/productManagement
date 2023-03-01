@@ -6,7 +6,6 @@
         <VList>
           <VListItem>
             <EditProductForm :product-id="productId" />
-            <!-- <VBtn @click="openConfirm" prepend-icon="mdi-delete">delete</VBtn> -->
             <ConfirmPopup
               title="Delete"
               message="Are you sure to remove?"
