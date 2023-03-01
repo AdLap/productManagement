@@ -67,9 +67,6 @@
           >
             Close
           </VBtn>
-          <!-- <VBtn color="blue-darken-1" variant="text" @click="submitForm">
-            Save
-          </VBtn> -->
           <ConfirmPopup
             title="Save"
             message="Are you sure to save the changes?"

@@ -2,7 +2,7 @@
   <VContainer class="h-screen d-flex flex-column justify-evenly" fluid>
     <VRow align="center">
       <VCol cols="12">
-        <VCard class="text-center mx-auto pa-5 w-100"  max-width="600">
+        <VCard class="text-center mx-auto pa-5 w-100" max-width="600">
           <h1>{{ title }}</h1>
           <p>{{ description }}</p>
         </VCard>
@@ -35,7 +35,7 @@
       >
         <VRow class="mt-5 justify-center" no-gutters>
           <Login />
-          <VBtn variant="plain">Załóż konto</VBtn>
+          <VBtn variant="plain">Sign up</VBtn>
         </VRow>
       </VCol>
     </VRow>
@@ -55,7 +55,3 @@ defineProps<{
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 </script>
-
-<style scoped lang="scss">
-@import '@/style/components/homePage.scss';
-</style>

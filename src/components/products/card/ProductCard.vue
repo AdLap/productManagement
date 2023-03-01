@@ -16,21 +16,16 @@
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
 import type { Product } from '@/type/types'
-import { storeToRefs } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductActions from '@/components/products/ProductActions.vue'
 
 const productStore = useProductsStore()
-// const { products } = storeToRefs(productStore)
-
 const product = ref<Product | null>(null)
-
 const route = useRoute()
-// const { id } = route.params
 const id = Number(route.params.id)
 
-onBeforeMount(() => {
+onBeforeMount((): void => {
   product.value = productStore.findProduct(id)
 })
 </script>
