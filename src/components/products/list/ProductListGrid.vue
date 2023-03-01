@@ -38,8 +38,6 @@ defineProps<{
   products: Product[]
 }>()
 
-defineEmits(['product'])
-
 const goToCard = (id: number): void => {
   router.push({ name: 'product', params: { id } })
 }
