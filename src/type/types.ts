@@ -20,7 +20,6 @@ export interface Product {
   readonly creationAt: string
   readonly updatedAt: string
   categoryId: number
-  category: Category
 }
 
 export interface Products {

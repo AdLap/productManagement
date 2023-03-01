@@ -53,7 +53,18 @@
                   required
                   v-model="images"
                   :rules="formRules.images"
-                />
+                ></VTextField>
+              </VCol>
+              <VCol cols="12" sm="6">
+                <v-select
+                  :items="categories"
+                  item-title="name"
+                  item-value="id"
+                  label="Category"
+                  required
+                  v-model="product.categoryId"
+                  :rules="formRules.category"
+                ></v-select>
               </VCol>
             </VRow>
           </VContainer>
@@ -84,23 +95,29 @@ import { useProductsStore } from '@/stores/products.store'
 import type { Product } from '@/type/types'
 import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
+import { storeToRefs } from 'pinia'
+import { useCategoriesStore } from '@/stores/categories.store'
 
 const props = defineProps<{
   productId: number
 }>()
 
 const productStore = useProductsStore()
+const categoriesStore = useCategoriesStore()
+const { categories } = storeToRefs(categoriesStore)
+
 const editedProduct = productStore.findProduct(props.productId)
+console.log('edited::', editedProduct)
+const product = ref<Product>({ ...editedProduct })
+//   {
+//   title: editedProduct.title, // TODO
+//   price: editedProduct.price,
+//   description: editedProduct.description,
+//   images: editedProduct.images,
+//   categoryId: editedProduct.categoryId
+// })
 
-// @ts-ignore
-const product = ref<Product>({
-  title: editedProduct.title,
-  price: editedProduct.price,
-  description: editedProduct.description,
-  images: editedProduct.images,
-  categoryId: editedProduct.category.id
-})
-
+console.log('prodedit::', product.value )
 const images = computed({
   get() {
     return product.value.images
