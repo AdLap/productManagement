@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
-import EditProductForm from '@/components/products/EditProductForm.vue'
+import EditProductForm from '@/components/catalog/products/EditProductForm.vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 
 defineProps<{

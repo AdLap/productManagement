@@ -25,6 +25,13 @@
           rotuer
           :to="item.link"
         />
+        <VListItem
+          prepend-icon="mdi-folder"
+          title="Categories"
+          value="categories"
+        >
+          <CategoriesList />
+        </VListItem>
       </VList>
     </VList>
   </VNavigationDrawer>
@@ -32,6 +39,7 @@
 
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
+import CategoriesList from '@/components/catalog/categories/CategoriesList.vue'
 
 const { smAndUp } = useDisplay()
 

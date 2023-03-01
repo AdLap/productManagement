@@ -18,7 +18,7 @@ import { useProductsStore } from '@/stores/products.store'
 import type { Product } from '@/type/types'
 import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import ProductActions from '@/components/products/ProductActions.vue'
+import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
 const productStore = useProductsStore()
 const product = ref<Product | null>(null)

@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import router from '@/router'
 import type { Products } from '@/type/types'
-import ProductActions from '@/components/products/ProductActions.vue'
+import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
 defineProps<{
   products: Products
