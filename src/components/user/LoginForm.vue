@@ -13,9 +13,9 @@
         <VTextField
           v-model="loginData.password"
           label="Password"
-          :type="show ? 'password' : 'text'"
-          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show = !show"
+          :type="showPassword ? 'password' : 'text'"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="showPassword = !showPassword"
           :rules="formRules.password"
         />
         <VBtn @click="loginUser" block class="mt-2">Sign in</VBtn>
@@ -24,66 +24,59 @@
   </VDialog>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.store'
 import type { LoginData } from '@/type/types'
 
-export default {
-  setup() {
-    const authStore = useAuthStore()
+const authStore = useAuthStore()
 
-    const loginData = ref<LoginData>({
-      email: '',
-      password: ''
-    })
+const loginData = ref<LoginData>({
+  email: '',
+  password: ''
+})
 
-    const formRules = ref({
-      email: [
-        (value: string): boolean | string => {
-          if (value.length > 3) return true
-          return 'Enter more than 3 characters'
-        }
-      ],
-      password: [
-        (value: string): boolean | string =>
-          value.length > 3 || 'Enter more than 3 characters'
-      ]
-    })
-
-    const form = ref(null)
-    const show = ref(false)
-
-    const valid = async () => {
-      // @ts-ignore
-      return await form.value.validate()
-    }
-
-    const loginUser = async () => {
-      console.log(
-        `Login: ${loginData.value.email}, Password: ${loginData.value.password}`
+const formRules = ref({
+  email: [
+    (value: string): boolean | string => {
+      if (value.length < 3) return 'Enter more than 3 characters'
+      if (
+        !/^[a-z\d]+[\w\d.-]*@(?:[a-z\d]+[a-z\d-]+\.){1,5}[a-z]{2,6}$/i.test(
+          value
+        )
       )
-
-      // TODO validation on submit
-      // valid().then(response => {
-      //   if (!response.valid) {
-      //     return
-      //   }
-      const { email, password } = loginData.value
-      try {
-        return await authStore.login(email, password)
-      } catch (error) {
-        return console.error(error)
-      }
+        return 'Enter valid email'
+      return true
     }
-
-    return {
-      loginData,
-      formRules,
-      loginUser,
-      show
+  ],
+  password: [
+    (value: string): boolean | string => {
+      if (value.length < 3) return 'Enter more than 3 characters'
+      return true
     }
-  }
+  ]
+})
+
+const form = ref(null)
+const showPassword = ref(false)
+
+const valid = async () => {
+  // @ts-ignore
+  return await form.value.validate()
+}
+
+const loginUser = async () => {
+  console.log(
+    `Login: ${loginData.value.email}, Password: ${loginData.value.password}`
+  )
+
+  valid().then((response) => {
+    if (!response.valid) {
+      return
+    }
+    const { email, password } = loginData.value
+    authStore.login(email, password)
+  })
 }
 </script>
 
