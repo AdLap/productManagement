@@ -1,14 +1,14 @@
 <template>
-  <VContainer class="h-screen d-flex flex-column justify-evenly" fluid>
-    <VRow align="center">
-      <VCol cols="12">
-        <VCard class="text-center mx-auto pa-5 w-100" max-width="600">
-          <h1>{{ title }}</h1>
-          <p>{{ description }}</p>
+  <VContainer class="my-auto">
+    <VRow align="center" max-width="800">
+      <VCol cols="12" class="mx-auto">
+        <VCard class="text-center mx-auto pa-5 w-100" max-width="800">
+          <VCardTitle class="text-h5 text-sm-h4 pa-6">{{ title }}</VCardTitle>
+          <VCardText>{{ description }}</VCardText>
         </VCard>
       </VCol>
     </VRow>
-    <VRow>
+    <VRow max-width="800" justify="space-evenly">
       <VCol cols="12" sm="6">
         <VCard>
           <VImg
@@ -37,6 +37,11 @@
           <Login />
           <VBtn variant="plain">Sign up</VBtn>
         </VRow>
+      </VCol>
+      <VCol v-else class="align-self-sm-center order-sm-first" cols="12" sm="4">
+        <VCard>
+          Welcome in your new oportunity
+        </VCard>
       </VCol>
     </VRow>
   </VContainer>

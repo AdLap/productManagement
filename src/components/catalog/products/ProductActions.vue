@@ -1,5 +1,5 @@
 <template>
-  <VCardActions class="justify-end">
+  <VCardActions :class="displayGrid ? 'justify-end' : 'justify-center'">
     <VBtn>
       <VIcon icon="mdi-menu" />
       <VMenu activator="parent">
@@ -7,7 +7,7 @@
           <VListItem>
             <EditProductForm :product-id="productId" />
             <ConfirmPopup
-              title="Delete"
+              title="delete"
               message="Are you sure to remove?"
               prepend-icon="mdi-delete"
               @agree="productStore.deleteProduct(productId)"
@@ -23,10 +23,12 @@
 import { useProductsStore } from '@/stores/products.store'
 import EditProductForm from '@/components/catalog/products/EditProductForm.vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
+import { storeToRefs } from 'pinia'
 
 defineProps<{
   productId: number
 }>()
 
 const productStore = useProductsStore()
+const { displayGrid } = storeToRefs(productStore)
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <VRow>
+  <VRow class="mt-0">
     <VCol
       cols="12"
       sm="6"
@@ -10,7 +10,13 @@
       @click="goToCard(product.id)"
     >
       <VCard class="product-card-grid text-sx-center ma-3">
-        <VImg :src="product.images[0]" cover class="mx-auto" max-width="200">
+        <VImg
+          :src="product.images[0]"
+          cover
+          class="mx-auto"
+          max-width="200"
+          height="200"
+        >
           <template v-slot:placeholder>
             <VRow class="fill-height ma-0" align="center" justify="center">
               <VProgressCircular indeterminate color="grey-lighten-5" />

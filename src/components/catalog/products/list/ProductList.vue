@@ -1,20 +1,23 @@
 <template>
-  <VSheet
-    elevation="4"
-    max-max-width="600"
-    class="d-flex justify-space-between pa-3"
-  >
-    <h2>Product List</h2>
-    <AddProductForm />
-    <VBtn @click="productStore.changeListGrid">
-      <VIcon :icon="displayGrid ? 'mdi-view-list' : 'mdi-view-grid'" />
-    </VBtn>
-  </VSheet>
+  <VContainer fluid class="h-100 d-flex flex-column">
+    <VSheet elevation="4" class="d-flex justify-space-between pa-3">
+      <h2 class="me-auto">Product List</h2>
+      <AddProductForm />
+      <VBtn @click="productStore.changeListGrid" class="ml-4">
+        <VIcon :icon="displayGrid ? 'mdi-view-list' : 'mdi-view-grid'" />
+      </VBtn>
+    </VSheet>
 
-  <VContainer fluid>
+    <LoadingSpinner
+      :loading="loading"
+      :size="128"
+      :width="12"
+      color="grey-lighten-5"
+    />
+
     <ProductListGrid v-if="displayGrid" :products="paginatedProducts" />
     <ProductListList v-else :products="paginatedProducts" />
-    <VRow justify="center">
+    <VRow justify="center" align="end">
       <VCol cols="6">
         <VContainer class="max-width">
           <VPagination
@@ -37,9 +40,10 @@ import ProductListList from '@/components/catalog/products/list/ProductListList.
 import AddProductForm from '@/components/catalog/products/AddProductForm.vue'
 import { computed, onBeforeMount, ref } from 'vue'
 import type { Product } from '@/type/types'
+import LoadingSpinner from '@/components/utilities/LoadingSpinner.vue'
 
 const productStore = useProductsStore()
-const { products, displayGrid } = storeToRefs(productStore)
+const { products, loading, displayGrid } = storeToRefs(productStore)
 
 onBeforeMount(() => {
   if (!products.value.length) {
