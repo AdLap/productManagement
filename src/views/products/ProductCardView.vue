@@ -4,5 +4,5 @@
 </template>
 
 <script setup lang="ts">
-import ProductCard from '@/components/products/card/ProductCard.vue'
+import ProductCard from '@/components/catalog/products/card/ProductCard.vue'
 </script>

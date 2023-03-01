@@ -32,9 +32,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useProductsStore } from '@/stores/products.store'
-import ProductListGrid from '@/components/products/list/ProductListGrid.vue'
-import ProductListList from '@/components/products/list/ProductListList.vue'
-import AddProductForm from '@/components/products/AddProductForm.vue'
+import ProductListGrid from '@/components/catalog/products/list/ProductListGrid.vue'
+import ProductListList from '@/components/catalog/products/list/ProductListList.vue'
+import AddProductForm from '@/components/catalog/products/AddProductForm.vue'
 import { computed, onBeforeMount, ref } from 'vue'
 import type { Product } from '@/type/types'
 
@@ -53,7 +53,9 @@ const page = ref({
   perPage: 25
 })
 
-const paginationLength = computed<number>(() => page.value.length / page.value.perPage)
+const paginationLength = computed<number>(() =>
+  Math.ceil(page.value.length / page.value.perPage)
+)
 
 const paginatedProducts = computed<Product[]>(() => {
   const lastProduct = page.value.perPage * page.value.currPage
