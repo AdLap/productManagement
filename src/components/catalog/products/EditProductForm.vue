@@ -1,41 +1,50 @@
 <template>
-  <VRow justify="center">
-    <VDialog v-model="formVisible" max-width="1024">
+  <VCardActions>
+    <VDialog v-model="formVisible" max-width="800">
       <template v-slot:activator="{ props }">
-        <VBtn prepend-icon="mdi-note-edit" v-bind="props">edit</VBtn>
+        <VBtn
+          prepend-icon="mdi-note-edit"
+          v-bind="props"
+          class="w-100 justify-start"
+          >edit</VBtn
+        >
       </template>
-      <VCard>
-        <VCardTitle>
-          <span class="text-h5">Edit product</span>
-        </VCardTitle>
+      <VCard class="pa-4">
+        <VCardTitle class="text-h5">Edit product</VCardTitle>
         <VForm fast-fail ref="form">
           <VContainer>
             <VRow>
-              <VCol cols="12" sm="6" md="4">
+              <VCol cols="12" sm="6">
                 <VTextField
                   label="Title"
                   required
                   v-model="product.title"
                   :rules="formRules.title"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6" md="4">
-                <VTextarea
-                  label="Description"
-                  required
-                  v-model="product.description"
-                  :rules="formRules.description"
-                >
-                </VTextarea>
-              </VCol>
-              <VCol cols="12" sm="6" md="4">
+                />
                 <VTextField
                   label="Price"
                   required
                   v-model="product.price"
                   :rules="formRules.price"
-                ></VTextField>
+                />
+                <VSelect
+                  :items="[1, 2, 3, 4, 5]"
+                  label="Category"
+                  required
+                  v-model="product.categoryId"
+                  :rules="formRules.category"
+                />
               </VCol>
+              <VCol cols="12" sm="6">
+                <VTextarea
+                  label="Description"
+                  required
+                  v-model="product.description"
+                  :rules="formRules.description"
+                />
+              </VCol>
+            </VRow>
+            <VRow>
               <VCol cols="12">
                 <VTextField
                   label="Add pictures"
@@ -44,22 +53,13 @@
                   required
                   v-model="images"
                   :rules="formRules.images"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6">
-                <v-select
-                  :items="[1, 2, 3, 4, 5]"
-                  label="Category"
-                  required
-                  v-model="product.categoryId"
-                  :rules="formRules.category"
-                ></v-select>
+                />
               </VCol>
             </VRow>
           </VContainer>
         </VForm>
         <VCardActions>
-          <VSpacer></VSpacer>
+          <VSpacer />
           <VBtn
             color="blue-darken-1"
             variant="text"
@@ -68,7 +68,7 @@
             Close
           </VBtn>
           <ConfirmPopup
-            title="Update"
+            title="update"
             message="Are you sure to save the changes?"
             prepend-icon="mdi-note-edit"
             @agree="submitForm"
@@ -76,7 +76,7 @@
         </VCardActions>
       </VCard>
     </VDialog>
-  </VRow>
+  </VCardActions>
 </template>
 
 <script setup lang="ts">
@@ -117,15 +117,19 @@ const form = ref(null)
 const formRules = ref({
   title: [
     (value: string): boolean | string => {
-      if (value.length < 3) return 'The title should be longer than 3 characters'
-      if (value.length > 63) return 'The title should be less than 64 characters'
+      if (value.length < 3)
+        return 'The title should be longer than 3 characters'
+      if (value.length > 63)
+        return 'The title should be less than 64 characters'
       return true
     }
   ],
   description: [
     (value: string): boolean | string => {
-      if (value.length < 32) return 'The description should be longer than 32 characters'
-      if (value.length > 128) return 'The description should be less than 128 characters long'
+      if (value.length < 32)
+        return 'The description should be longer than 32 characters'
+      if (value.length > 128)
+        return 'The description should be less than 128 characters long'
       return true
     }
   ],

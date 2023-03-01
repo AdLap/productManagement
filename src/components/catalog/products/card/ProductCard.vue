@@ -1,7 +1,7 @@
 <template>
-  <VContainer fluid class="d-flex justify-center align-center">
-    <VCard>
-      <VCardTitle>{{ product?.title }}</VCardTitle>
+  <VContainer fluid class="d-flex justify-center align-center h-100">
+    <VCard max-width="800" class="h-50 pa-4">
+      <VCardTitle class="text-h5">{{ product?.title }}</VCardTitle>
       <VCardText>{{ product?.description }}</VCardText>
       <VRow v-if="product?.images.length" class="pa-3 justify-center">
         <VCol v-for="(image, index) in product?.images" :key="index">
