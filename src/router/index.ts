@@ -35,6 +35,7 @@ router.beforeEach(async (to) => {
   const auth = useAuthStore()
 
   if (authRequired && !auth.user) {
+    //@ts-expect-error //TODO
     auth.returnUrl = to.fullPath
     return '/'
   }

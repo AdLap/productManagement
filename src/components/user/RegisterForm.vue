@@ -4,7 +4,7 @@
       <VBtn v-bind="props" variant="plain">Sign up</VBtn>
     </template>
     <VSheet width="400" class="mx-auto">
-    <h2 class="text-center">WorkInProgress</h2>
+      <h2 class="text-center">WorkInProgress</h2>
       <VForm fast-fail ref="form" class="pa-6">
         <VTextField
           v-model="registerData.email"
