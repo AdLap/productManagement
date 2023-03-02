@@ -1,5 +1,4 @@
 <template>
-  <h1>CardView view</h1>
   <ProductCard />
 </template>
 

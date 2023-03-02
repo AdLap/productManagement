@@ -3,6 +3,12 @@ export interface LoginData {
   password: string
 }
 
+export interface RegisterData extends LoginData {
+  name: string
+  role: string
+  avatar: string
+}
+
 export interface Category {
   readonly id: number
   name: string
@@ -20,7 +26,6 @@ export interface Product {
   readonly creationAt: string
   readonly updatedAt: string
   categoryId: number
-  category: Category
 }
 
 export interface Products {

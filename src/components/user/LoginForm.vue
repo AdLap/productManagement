@@ -3,8 +3,8 @@
     <template v-slot:activator="{ props }">
       <VBtn v-bind="props">Sign in</VBtn>
     </template>
-    <VSheet width="300" class="mx-auto">
-      <VForm fast-fail ref="form" class="pa-4">
+    <VSheet width="400" class="mx-auto">
+      <VForm fast-fail ref="form" class="pa-6">
         <VTextField
           v-model="loginData.email"
           label="Login"
@@ -66,10 +66,6 @@ const valid = async () => {
 }
 
 const loginUser = async () => {
-  console.log(
-    `Login: ${loginData.value.email}, Password: ${loginData.value.password}`
-  )
-
   valid().then((response) => {
     if (!response.valid) {
       return
@@ -79,5 +75,3 @@ const loginUser = async () => {
   })
 }
 </script>
-
-<style scoped lang="scss"></style>

@@ -3,7 +3,8 @@
     <VCard
       elevation="4"
       max-width="700"
-      class="d-flex justify-space-between pa-3 mx-auto w-75"
+      min-height="767"
+      class="d-flex justify-space-between pa-3 w-75 mx-auto"
     >
       <VCardTitle>Category List</VCardTitle>
       <!-- <AddCategoryForm /> -->
@@ -12,8 +13,8 @@
           <CategoryList :categories="paginatedCategories" />
         </VCol>
       </VRow>
-      <VRow v-if="paginationLength > 1" justify="center">
-        <VCol cols="10">
+      <VRow v-if="paginationLength > 1" justify="center" align="end">
+        <VCol cols="10" class="h-auto">
           <VContainer class="max-width">
             <VPagination
               v-model="page.currPage"

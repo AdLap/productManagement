@@ -1,7 +1,7 @@
 <template>
   <VApp>
     <SideBar />
-    <VMain>
+    <VMain class="h-screen d-flex flex-column">
       <TopBar v-if="smAndUp" />
       <RouterView />
     </VMain>
