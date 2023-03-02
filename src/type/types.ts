@@ -17,27 +17,22 @@ export interface Category {
   updatedAt: string
 }
 
-export interface Product {
-  readonly id: number
+export interface ProductAdd {
   title: string
-  price: number
+  price: number | null
   description: string
   images: string[] | string
+  categoryId: number | null
+}
+
+export interface Product extends ProductAdd {
+  readonly id: number
   readonly creationAt: string
   readonly updatedAt: string
-  categoryId: number
 }
 
 export interface Products {
   [index: number]: Product
-}
-
-export interface ProductInForm {
-  title: string
-  price: number
-  description: string
-  images: string
-  categoryId: number
 }
 
 export interface ConfirmOptions {
