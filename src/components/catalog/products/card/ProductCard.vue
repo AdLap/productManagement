@@ -20,12 +20,13 @@ import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
-const productStore = useProductsStore()
-const product = ref<Product | null>(null)
-const route = useRoute()
-const id = Number(route.params.id)
-
 onBeforeMount((): void => {
   product.value = productStore.findProduct(id)
 })
+
+const productStore = useProductsStore()
+const product = ref<Product | null>(null)
+
+const route = useRoute()
+const id = Number(route.params.id)
 </script>

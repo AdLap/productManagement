@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { fetching } from '@/fetch/fetch'
-import type { Product } from '@/type/types'
+import type { Product, ProductAdd } from '@/type/types'
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/products`
 
@@ -43,7 +43,7 @@ export const useProductsStore = defineStore('products', {
       const product = Object.assign(this.currentProduct, pr)
       return product
     },
-    addProduct(product: Product): void {
+    addProduct(product: ProductAdd): void {
       this.loading = true
       fetching
         .post(baseUrl, product)

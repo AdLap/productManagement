@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
-import type { Product } from '@/type/types'
+import type { ProductAdd } from '@/type/types'
 import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { useCategoriesStore } from '@/stores/categories.store'
@@ -84,8 +84,13 @@ const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
 
-// @ts-expect-error // TODO
-const product = ref<Product>({})
+const product = ref<ProductAdd>({
+  title: '',
+  price: null,
+  description: '',
+  images: '',
+  categoryId: null
+})
 
 const images = computed({
   get() {
@@ -146,13 +151,14 @@ const formRules = ref({
     }
   ]
 })
-
 const formVisible = ref(false)
 const form = ref(null)
+
 const valid = async () => {
-  // @ts-ignore
+  //@ts-expect-error
   return await form.value.validate()
 }
+
 const submitForm = (): void => {
   valid().then((response) => {
     console.log(response)
