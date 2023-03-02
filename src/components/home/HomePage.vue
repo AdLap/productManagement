@@ -35,12 +35,13 @@
       >
         <VRow class="mt-5 justify-center" no-gutters>
           <Login />
-          <VBtn variant="plain">Sign up</VBtn>
+          <Register />
         </VRow>
       </VCol>
       <VCol v-else class="align-self-sm-center order-sm-first" cols="12" sm="4">
-        <VCard>
-          Welcome in your new oportunity
+        <VCard class="text-center">
+          <VCardTitle> Hello {{ user.name }} </VCardTitle>
+          <VCardText> New opportunities ahead !!! </VCardText>
         </VCard>
       </VCol>
     </VRow>
@@ -51,6 +52,7 @@
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth.store'
 import Login from '@/components/user/LoginForm.vue'
+import Register from '@/components/user/RegisterForm.vue'
 
 defineProps<{
   title: string
