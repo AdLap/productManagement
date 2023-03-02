@@ -6,6 +6,7 @@ const baseUrl = `${import.meta.env.VITE_API_URL}`
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
+    //@ts-expect-error //TODO
     user: JSON.parse(localStorage.getItem('user')),
     returnUrl: null
   }),
