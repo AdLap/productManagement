@@ -3,7 +3,7 @@
     <VCard max-width="800" class="h-50 pa-4">
       <VCardTitle class="text-h5">{{ product?.title }}</VCardTitle>
       <VCardText>{{ product?.description }}</VCardText>
-      <VRow v-if="product?.images.length" class="pa-3 justify-center">
+      <VRow class="pa-3 justify-center">
         <VCol v-for="(image, index) in product?.images" :key="index">
           <VImg :src="image" height="200" width="200" cover />
         </VCol>

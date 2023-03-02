@@ -89,8 +89,7 @@ const formRules = ref({
 
 const form = ref(null)
 const showPassword = ref(false)
-const showPassword2 = ref(false)
-
+// const showPassword2 = ref(false) //TODO
 const valid = async () => {
   // @ts-ignore
   return await form.value.validate()

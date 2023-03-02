@@ -40,7 +40,7 @@
       </VCol>
       <VCol v-else class="align-self-sm-center order-sm-first" cols="12" sm="4">
         <VCard class="text-center">
-          <VCardTitle> Hello {{ user.name }} </VCardTitle>
+          <VCardTitle> Hello {{ user.name ?? 'Boss' }} </VCardTitle>
           <VCardText> New opportunities ahead !!! </VCardText>
         </VCard>
       </VCol>

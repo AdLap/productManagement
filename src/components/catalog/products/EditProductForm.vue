@@ -28,7 +28,9 @@
                   :rules="formRules.price"
                 />
                 <VSelect
-                  :items="[1, 2, 3, 4, 5]"
+                  :items="categories"
+                  item-title="name"
+                  item-value="id"
                   label="Category"
                   required
                   v-model="product.categoryId"
@@ -53,18 +55,7 @@
                   required
                   v-model="images"
                   :rules="formRules.images"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6">
-                <v-select
-                  :items="categories"
-                  item-title="name"
-                  item-value="id"
-                  label="Category"
-                  required
-                  v-model="product.categoryId"
-                  :rules="formRules.category"
-                ></v-select>
+                />
               </VCol>
             </VRow>
           </VContainer>
@@ -97,14 +88,16 @@ import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { storeToRefs } from 'pinia'
 import { useCategoriesStore } from '@/stores/categories.store'
+
 const props = defineProps<{
   productId: number
 }>()
+
 const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
+
 const editedProduct = productStore.findProduct(props.productId)
-console.log('edited::', editedProduct)
 const product = ref<Product>({ ...editedProduct })
 //   {
 //   title: editedProduct.title, // TODO
@@ -113,7 +106,7 @@ const product = ref<Product>({ ...editedProduct })
 //   images: editedProduct.images,
 //   categoryId: editedProduct.categoryId
 // })
-console.log('prodedit::', product.value )
+
 const images = computed({
   get() {
     return product.value.images
@@ -123,11 +116,14 @@ const images = computed({
     product.value.images = [...image]
   }
 })
+
 const formVisible = ref(false)
 const form = ref(null)
+
 const formRules = ref({
   title: [
     (value: string): boolean | string => {
+      if (!value) return 'Enter title'
       if (value.length < 3)
         return 'The title should be longer than 3 characters'
       if (value.length > 63)
@@ -137,6 +133,7 @@ const formRules = ref({
   ],
   description: [
     (value: string): boolean | string => {
+      if (!value) return 'Enter description'
       if (value.length < 32)
         return 'The description should be longer than 32 characters'
       if (value.length > 128)
@@ -146,6 +143,7 @@ const formRules = ref({
   ],
   price: [
     (value: number): boolean | string => {
+      if (!value) return 'Enter price'
       if (value <= 0) return 'Price must be positive'
       //@ts-expect-error
       if (!/[0-9]?[0-9]?(\.[0-9][0-9]?)?/gm.test(value)) return 'Enter a number'
@@ -154,13 +152,13 @@ const formRules = ref({
   ],
   images: [
     (value: string): boolean | string => {
+      if (!value) return 'Add links to pictures'
       if (
         !/^((http(s):\/\/.)[-a-zA-Z0-9@:%.~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%.~#?&//=]*)([^ ,;$]*[ ]*))/gm.test(
           value
         )
       )
         return 'Enter the correct URL'
-      if (!value) return 'Add links to pictures'
       return true
     }
   ],
@@ -171,6 +169,7 @@ const formRules = ref({
     }
   ]
 })
+
 const valid = async () => {
   // @ts-ignore
   return await form.value.validate()
