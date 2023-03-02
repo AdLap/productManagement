@@ -99,13 +99,6 @@ const { categories } = storeToRefs(categoriesStore)
 
 const editedProduct = productStore.findProduct(props.productId)
 const product = ref<Product>({ ...editedProduct })
-//   {
-//   title: editedProduct.title, // TODO
-//   price: editedProduct.price,
-//   description: editedProduct.description,
-//   images: editedProduct.images,
-//   categoryId: editedProduct.categoryId
-// })
 
 const images = computed({
   get() {
