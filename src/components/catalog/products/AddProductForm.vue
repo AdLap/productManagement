@@ -1,84 +1,75 @@
 <template>
-  <VRow justify="center">
-    <VDialog v-model="formVisible" max-width="1024">
-      <template v-slot:activator="{ props }">
-        <VBtn prepend-icon="mdi-note-edit" v-bind="props">Add</VBtn>
-      </template>
-      <VCard>
-        <VCardTitle>
-          <span class="text-h5">Add product</span>
-        </VCardTitle>
-        <VForm fast-fail ref="form">
-          <VContainer>
-            <VRow>
-              <VCol cols="12" sm="6" md="4">
-                <VTextField
-                  label="Title"
-                  required
-                  v-model="product.title"
-                  :rules="formRules.title"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6" md="4">
-                <VTextarea
-                  label="Description"
-                  required
-                  v-model="product.description"
-                  :rules="formRules.description"
-                >
-                </VTextarea>
-              </VCol>
-              <VCol cols="12" sm="6" md="4">
-                <VTextField
-                  label="Price"
-                  required
-                  v-model="product.price"
-                  :rules="formRules.price"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12">
-                <VTextField
-                  label="Add pictures"
-                  hint="add the full url to the pictures by separating them with a comma"
-                  persistent-hint
-                  required
-                  v-model="images"
-                  :rules="formRules.images"
-                ></VTextField>
-              </VCol>
-              <VCol cols="12" sm="6">
-                <v-select
-                  :items="categories"
-                  item-title="name"
-                  item-value="id"
-                  label="Category"
-                  required
-                  v-model="product.categoryId"
-                  :rules="formRules.category"
-                ></v-select>
-              </VCol>
-            </VRow>
-          </VContainer>
-        </VForm>
-        <VCardActions>
-          <VSpacer></VSpacer>
-          <VBtn
-            color="blue-darken-1"
-            variant="text"
-            @click="formVisible = false"
-          >
-            Close
-          </VBtn>
-          <ConfirmPopup
-            title="Save"
-            message="Are you sure to save the changes?"
-            prepend-icon="mdi-content-save"
-            @agree="submitForm"
-          />
-        </VCardActions>
-      </VCard>
-    </VDialog>
-  </VRow>
+  <VDialog v-model="formVisible" max-width="800">
+    <template v-slot:activator="{ props }">
+      <VBtn prepend-icon="mdi-note-plus" v-bind="props">Add</VBtn>
+    </template>
+    <VCard>
+      <VCardTitle>
+        <span class="text-h5">Add product</span>
+      </VCardTitle>
+      <VForm fast-fail ref="form">
+        <VContainer>
+          <VRow>
+            <VCol cols="12" sm="6">
+              <VTextField
+                label="Title"
+                required
+                v-model="product.title"
+                :rules="formRules.title"
+              />
+              <VTextField
+                label="Price"
+                required
+                v-model="product.price"
+                :rules="formRules.price"
+              />
+              <VSelect
+                :items="categories"
+                item-title="name"
+                item-value="id"
+                label="Category"
+                required
+                v-model="product.categoryId"
+                :rules="formRules.category"
+              />
+            </VCol>
+            <VCol cols="12" sm="6">
+              <VTextarea
+                label="Description"
+                required
+                v-model="product.description"
+                :rules="formRules.description"
+              />
+            </VCol>
+          </VRow>
+          <VRow>
+            <VCol cols="12">
+              <VTextField
+                label="Add pictures"
+                hint="add the full url to the pictures by separating them with a comma"
+                persistent-hint
+                required
+                v-model="images"
+                :rules="formRules.images"
+              />
+            </VCol>
+          </VRow>
+        </VContainer>
+      </VForm>
+      <VCardActions>
+        <VSpacer />
+        <VBtn color="blue-darken-1" variant="text" @click="formVisible = false">
+          Close
+        </VBtn>
+        <ConfirmPopup
+          title="save"
+          message="Are you sure to save the changes?"
+          prepend-icon="mdi-content-plus"
+          @agree="submitForm"
+        />
+      </VCardActions>
+    </VCard>
+  </VDialog>
 </template>
 
 <script setup lang="ts">
@@ -88,11 +79,14 @@ import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { useCategoriesStore } from '@/stores/categories.store'
 import { storeToRefs } from 'pinia'
+
 const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
+
 // @ts-expect-error // TODO
 const product = ref<Product>({})
+
 const images = computed({
   get() {
     return product.value.images
@@ -102,6 +96,7 @@ const images = computed({
     product.value.images = [...image]
   }
 })
+
 const formRules = ref({
   title: [
     (value: string): boolean | string => {
@@ -151,6 +146,7 @@ const formRules = ref({
     }
   ]
 })
+
 const formVisible = ref(false)
 const form = ref(null)
 const valid = async () => {
