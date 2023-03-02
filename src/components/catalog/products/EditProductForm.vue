@@ -97,15 +97,12 @@ import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { storeToRefs } from 'pinia'
 import { useCategoriesStore } from '@/stores/categories.store'
-
 const props = defineProps<{
   productId: number
 }>()
-
 const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
-
 const editedProduct = productStore.findProduct(props.productId)
 console.log('edited::', editedProduct)
 const product = ref<Product>({ ...editedProduct })
@@ -116,7 +113,6 @@ const product = ref<Product>({ ...editedProduct })
 //   images: editedProduct.images,
 //   categoryId: editedProduct.categoryId
 // })
-
 console.log('prodedit::', product.value )
 const images = computed({
   get() {
@@ -127,10 +123,8 @@ const images = computed({
     product.value.images = [...image]
   }
 })
-
 const formVisible = ref(false)
 const form = ref(null)
-
 const formRules = ref({
   title: [
     (value: string): boolean | string => {
@@ -177,12 +171,10 @@ const formRules = ref({
     }
   ]
 })
-
 const valid = async () => {
   // @ts-ignore
   return await form.value.validate()
 }
-
 const submitForm = (): void => {
   valid().then((response) => {
     console.log(response)
@@ -190,7 +182,6 @@ const submitForm = (): void => {
       console.error(response.errorMessages)
       return
     }
-
     productStore.updateProduct(props.productId, product.value)
   })
 }

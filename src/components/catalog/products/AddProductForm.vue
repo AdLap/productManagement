@@ -88,14 +88,11 @@ import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { useCategoriesStore } from '@/stores/categories.store'
 import { storeToRefs } from 'pinia'
-
 const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
-
 // @ts-expect-error // TODO
 const product = ref<Product>({})
-
 const images = computed({
   get() {
     return product.value.images
@@ -105,7 +102,6 @@ const images = computed({
     product.value.images = [...image]
   }
 })
-
 const formRules = ref({
   title: [
     (value: string): boolean | string => {
@@ -155,15 +151,12 @@ const formRules = ref({
     }
   ]
 })
-
 const formVisible = ref(false)
 const form = ref(null)
-
 const valid = async () => {
   // @ts-ignore
   return await form.value.validate()
 }
-
 const submitForm = (): void => {
   valid().then((response) => {
     console.log(response)
@@ -171,7 +164,6 @@ const submitForm = (): void => {
       console.error(response.errorMessages)
       return
     }
-
     productStore.addProduct(product.value)
   })
 }
