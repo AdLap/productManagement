@@ -1,7 +1,7 @@
 <template>
   <HomePage
     title="Manage your products"
-    description="Your business under your control! Sign&nbsp;in..."
+    description="Your business under YOUR control!"
   />
 </template>
 

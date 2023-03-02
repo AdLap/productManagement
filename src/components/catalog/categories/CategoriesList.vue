@@ -4,7 +4,7 @@
       elevation="4"
       max-width="700"
       min-height="767"
-      class="d-flex justify-space-between pa-3 mx-auto w-75"
+      class="d-flex justify-space-between pa-3 w-75 mx-auto"
     >
       <VCardTitle>Category List</VCardTitle>
       <!-- <AddCategoryForm /> -->
