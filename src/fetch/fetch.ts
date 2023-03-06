@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/auth.store'
+import type { Category, Product } from '@/type/types'
 
 const baseUrl = `${import.meta.env.VITE_API_URL}`
 
@@ -35,8 +36,8 @@ function authHeader(url: string): string | {} {
   }
 }
 
-function handleResponse(response: any): [] | Promise<Error> {
-  return response.text().then((text: any) => {
+function handleResponse(response: Response): [] | {} | Promise<Error> {
+  return response.text().then((text) => {
     const data = text && JSON.parse(text)
 
     if (!response.ok) {

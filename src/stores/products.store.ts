@@ -21,7 +21,7 @@ export const useProductsStore = defineStore('products', {
           if (products instanceof Error) {
             throw new Error('Wrong data')
           }
-          this.products = [...products]
+          if (Array.isArray(products)) this.products = [...products]
         })
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))
