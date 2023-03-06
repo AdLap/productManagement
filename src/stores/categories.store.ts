@@ -20,7 +20,7 @@ export const useCategoriesStore = defineStore('categories', {
           if (categories instanceof Error) {
             throw new Error('Wrong data')
           }
-          this.categories = [...categories]
+          if (Array.isArray(categories)) this.categories = [...categories]
         })
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))

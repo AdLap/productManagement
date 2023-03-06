@@ -43,7 +43,7 @@ import CategoriesList from '@/components/catalog/categories/CategoriesList.vue'
 
 const { smAndUp } = useDisplay()
 
-const sideBarItems = [
+let sideBarItems = [
   { icon: 'mdi-account', title: 'Account', value: 'account', link: '/' },
   {
     icon: 'mdi-dialpad',
