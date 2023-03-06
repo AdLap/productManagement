@@ -1,6 +1,10 @@
 <template>
   <VContainer fluid class="d-flex justify-center align-center h-100">
-    <VCard max-width="800" class="h-50 pa-4">
+    <VCard
+      max-width="800"
+      min-height="60vh"
+      class="product-card pa-4 d-flex flex-column"
+    >
       <VCardTitle class="text-h5">{{ product?.title }}</VCardTitle>
       <VCardText>{{ product?.description }}</VCardText>
       <VRow class="pa-3 justify-center">
