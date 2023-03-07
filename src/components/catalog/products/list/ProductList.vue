@@ -39,7 +39,7 @@ import ProductListGrid from '@/components/catalog/products/list/ProductListGrid.
 import ProductListList from '@/components/catalog/products/list/ProductListList.vue'
 import AddProductForm from '@/components/catalog/products/AddProductForm.vue'
 import { computed, onBeforeMount, ref } from 'vue'
-import type { Product } from '@/type/types'
+import type { ProductFull } from '@/type/types'
 import LoadingSpinner from '@/components/utilities/LoadingSpinner.vue'
 
 const productStore = useProductsStore()
@@ -61,7 +61,7 @@ const paginationLength = computed<number>(() =>
   Math.ceil(page.value.length / page.value.perPage)
 )
 
-const paginatedProducts = computed<Product[]>(() => {
+const paginatedProducts = computed<ProductFull[]>(() => {
   const lastProduct = page.value.perPage * page.value.currPage
   return products.value.slice(lastProduct - page.value.perPage, lastProduct)
 })
