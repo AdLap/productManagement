@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia'
 import { fetching } from '@/fetch/fetch'
-import type { Product, ProductFull, CurrentProduct } from '@/type/types'
+import type { Product, ProductFull } from '@/type/types'
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/products`
 
 export const useProductsStore = defineStore('products', {
   state: () => ({
     products: [] as ProductFull[],
-    currentProduct: {} as CurrentProduct,
     displayGrid: true,
     loading: false,
     error: null
@@ -26,22 +25,26 @@ export const useProductsStore = defineStore('products', {
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))
     },
-    getProduct(id: number): void {
+    async getProduct(id: number): Promise<ProductFull> {
       this.loading = true
-      fetching
+      const product: ProductFull = await fetching
         .get(`${baseUrl}/${id}`)
-        .then(
-          (product) =>
-            (this.currentProduct = Object.assign(this.currentProduct, product))
-        )
+        .then((product) => {
+          if (product instanceof Error) {
+            throw new Error('Wrong data')
+          }
+          return product
+        })
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))
+      return product
     },
-    findProduct(id: number): ProductFull {
+    async findProduct(id: number): Promise<ProductFull> {
       if (!this.products.length) {
-        this.getProduct(id)
-        return this.currentProduct[0]
+        const product = await this.getProduct(id)
+        return product
       }
+
       const product = this.products.filter((p: ProductFull) => p.id === id)
       return product[0]
     },

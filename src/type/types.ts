@@ -32,10 +32,6 @@ export interface ProductFull extends Product {
   category: Category
 }
 
-export interface CurrentProduct {
-  [key: number]: ProductFull
-}
-
 export interface ConfirmOptions {
   color: string
   width: number
