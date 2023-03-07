@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { fetching } from '@/fetch/fetch'
-import type { Product, ProductAdd } from '@/type/types'
+import type { Product, ProductFull, CurrentProduct } from '@/type/types'
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/products`
 
 export const useProductsStore = defineStore('products', {
   state: () => ({
-    products: [] as Product[],
-    currentProduct: {} as Product,
+    products: [] as ProductFull[],
+    currentProduct: {} as CurrentProduct,
     displayGrid: true,
     loading: false,
     error: null
@@ -30,20 +30,22 @@ export const useProductsStore = defineStore('products', {
       this.loading = true
       fetching
         .get(`${baseUrl}/${id}`)
-        .then((product) => Object.assign(this.currentProduct, product))
+        .then(
+          (product) =>
+            (this.currentProduct = Object.assign(this.currentProduct, product))
+        )
         .catch((error) => (this.error = error))
         .finally(() => (this.loading = false))
     },
-    findProduct(id: number): Product {
+    findProduct(id: number): ProductFull {
       if (!this.products.length) {
         this.getProduct(id)
-        return this.currentProduct
+        return this.currentProduct[0]
       }
-      const pr = this.products.filter((p: Product) => p.id === id)
-      const product = Object.assign(this.currentProduct, pr)
-      return product
+      const product = this.products.filter((p: ProductFull) => p.id === id)
+      return product[0]
     },
-    addProduct(product: ProductAdd): void {
+    addProduct(product: Product): void {
       this.loading = true
       fetching
         .post(baseUrl, product)
