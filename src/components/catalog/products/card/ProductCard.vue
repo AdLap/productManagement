@@ -1,5 +1,5 @@
 <template>
-  <VContainer fluid class="d-flex justify-center align-center h-100">
+  <VContainer fluid class="d-flex justify-sm-center align-center h-90 ma-auto">
     <VCard
       max-width="800"
       min-height="60vh"
@@ -7,9 +7,16 @@
     >
       <VCardTitle class="text-h5">{{ product?.title }}</VCardTitle>
       <VCardText>{{ product?.description }}</VCardText>
-      <VRow class="pa-3 justify-center">
+      <VRow
+        class="imgs-slider pa-3 justify-start justify-sm-center flex-nowrap flex-sm-wrap overflow-x-auto"
+      >
         <VCol v-for="(image, index) in product?.images" :key="index">
           <VImg :src="image" height="200" width="200" cover />
+        </VCol>
+      </VRow>
+      <VRow>
+        <VCol>
+          <VCardText>Price: {{ product?.price }}</VCardText>
         </VCol>
       </VRow>
       <ProductActions :product-id="id" />
@@ -35,3 +42,7 @@ const product = ref<ProductFull | null>(null)
 const route = useRoute()
 const id = Number(route.params.id)
 </script>
+
+<style lang="scss">
+@import '@/style/productCard';
+</style>
