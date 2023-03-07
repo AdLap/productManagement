@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
-import type { ProductAdd } from '@/type/types'
+import type { Product } from '@/type/types'
 import { computed, ref } from 'vue'
 import ConfirmPopup from '@/components/utilities/ConfirmPopup.vue'
 import { useCategoriesStore } from '@/stores/categories.store'
@@ -84,7 +84,7 @@ const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
 
-const product = ref<ProductAdd>({
+const product = ref<Product>({
   title: '',
   price: null,
   description: '',

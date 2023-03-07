@@ -17,7 +17,7 @@ export interface Category {
   updatedAt: string
 }
 
-export interface ProductAdd {
+export interface Product {
   title: string
   price: number | null
   description: string
@@ -25,14 +25,15 @@ export interface ProductAdd {
   categoryId: number | null
 }
 
-export interface Product extends ProductAdd {
-  readonly id: number
+export interface ProductFull extends Product {
+  readonly id: number | null
   readonly creationAt: string
   readonly updatedAt: string
+  category: Category
 }
 
-export interface Products {
-  [index: number]: Product
+export interface CurrentProduct {
+  [key: number]: ProductFull
 }
 
 export interface ConfirmOptions {
