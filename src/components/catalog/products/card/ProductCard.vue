@@ -31,8 +31,8 @@ import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
-onBeforeMount((): void => {
-  product.value = productStore.findProduct(id)
+onBeforeMount(async (): Promise<void> => {
+  product.value = await productStore.findProduct(id)
 })
 
 const productStore = useProductsStore()
