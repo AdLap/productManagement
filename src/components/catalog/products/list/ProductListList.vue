@@ -41,11 +41,11 @@
 
 <script setup lang="ts">
 import router from '@/router'
-import type { Products } from '@/type/types'
+import type { ProductFull } from '@/type/types'
 import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
 defineProps<{
-  products: Products
+  products: ProductFull[]
 }>()
 
 const goToCard = (id: number): void => {
