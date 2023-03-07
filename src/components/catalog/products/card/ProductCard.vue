@@ -1,6 +1,7 @@
 <template>
   <VContainer fluid class="d-flex justify-sm-center align-center h-90 ma-auto">
     <VCard
+      width="90%"
       max-width="800"
       min-height="60vh"
       class="product-card pa-4 d-flex flex-column"
@@ -31,8 +32,8 @@ import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductActions from '@/components/catalog/products/ProductActions.vue'
 
-onBeforeMount((): void => {
-  product.value = productStore.findProduct(id)
+onBeforeMount(async (): Promise<void> => {
+  product.value = await productStore.findProduct(id)
 })
 
 const productStore = useProductsStore()
