@@ -5,7 +5,9 @@
       <VMenu activator="parent">
         <VList>
           <VListItem>
-            <EditProductForm :product-id="productId" />
+            <Suspense>
+              <EditProductForm :product-id="productId" />
+            </Suspense>
             <ConfirmPopup
               title="delete"
               message="Are you sure to remove?"
