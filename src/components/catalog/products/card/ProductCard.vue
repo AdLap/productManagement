@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useProductsStore } from '@/stores/products.store'
-import type { ProductFull } from '@/type/types'
+import type { Product } from '@/type/types'
 import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ProductActions from '@/components/catalog/products/ProductActions.vue'
@@ -29,8 +29,7 @@ onBeforeMount((): void => {
 })
 
 const productStore = useProductsStore()
-
-const product = ref<ProductFull | null>(null)
+const product = ref<Product | null>(null)
 
 const route = useRoute()
 const id = Number(route.params.id)
