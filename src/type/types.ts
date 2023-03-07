@@ -26,7 +26,7 @@ export interface Product {
 }
 
 export interface ProductFull extends Product {
-  readonly id: number | null
+  readonly id: number
   readonly creationAt: string
   readonly updatedAt: string
   category: Category
