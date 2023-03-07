@@ -97,7 +97,7 @@ const productStore = useProductsStore()
 const categoriesStore = useCategoriesStore()
 const { categories } = storeToRefs(categoriesStore)
 
-const editedProduct = productStore.findProduct(props.productId)
+const editedProduct = await productStore.findProduct(props.productId)
 const product = ref<Product>({ ...editedProduct })
 
 const images = computed({
